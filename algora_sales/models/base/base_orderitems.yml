@@ -1,0 +1,45 @@
+models:
+  - name: base_orderitems
+    description: "Base model for order line items"
+    columns:
+      - name: orderitem_id
+        description: "Primary key for order items"
+        data_tests:
+          - not_null
+          - unique
+      - name: order_id
+        description: "Foreign key to base_orders"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('base_orders')
+                field: order_id
+      - name: product_id
+        description: "Foreign key to base_product"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('base_product')
+                field: product_id
+      - name: quantity
+        description: "Quantity of the product ordered"
+        data_tests:
+          - not_null
+      - name: supplier_id
+        description: "Foreign key to base_supplier"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('base_supplier')
+                field: supplier_id
+      - name: subtotal
+        description: "Line item subtotal after discount"
+        data_tests:
+          - not_null
+      - name: discount
+        description: "Discount applied to the line item"
+        data_tests:
+          - not_null

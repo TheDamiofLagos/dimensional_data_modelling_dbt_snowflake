@@ -1,0 +1,14 @@
+models:
+  - name: base_category
+    description: "Base model for product categories"
+    columns:
+      - name: category_id
+        description: "Primary key for categories"
+        data_tests:
+          - not_null
+          - unique
+      - name: category_name
+        description: "Category name. Unique per category"
+        data_tests:
+          - not_null
+          - unique

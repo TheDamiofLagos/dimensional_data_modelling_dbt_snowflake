@@ -1,0 +1,18 @@
+# Snowflake private key — NEVER commit this
+snowflake_key.p8
+
+# dbt build artifacts
+algora_sales/target/
+algora_sales/dbt_packages/
+algora_sales/logs/
+logs/
+
+# Python virtual environment
+algora_env/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# dbt profiles (contains credentials)
+profiles.yml

@@ -1,0 +1,45 @@
+models:
+  - name: base_orders
+    description: "Base model for orders"
+    columns:
+      - name: order_id_surrogate
+        description: "Surrogate primary key for orders"
+        data_tests:
+          - not_null
+          - unique
+      - name: order_id
+        description: "Natural key for orders"
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: "Foreign key to base_customer"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('base_customer')
+                field: customer_id
+      - name: order_date
+        description: "Date the order was placed"
+        data_tests:
+          - not_null
+      - name: campaign_id
+        description: "Foreign key to base_marketing_campaigns. Nullable — not all orders are linked to a campaign"
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('base_marketing_campaigns')
+                field: campaign_id
+      - name: amount
+        description: "Total order amount in cents"
+        data_tests:
+          - not_null
+      - name: payment_method_id
+        description: "Foreign key to base_payment_method"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('base_payment_method')
+                field: payment_method_id

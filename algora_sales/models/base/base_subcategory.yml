@@ -1,0 +1,21 @@
+models:
+  - name: base_subcategory
+    description: "Base model for product subcategories"
+    columns:
+      - name: subcategory_id
+        description: "Primary key for subcategories"
+        data_tests:
+          - not_null
+          - unique
+      - name: subcategory_name
+        description: "Subcategory name"
+        data_tests:
+          - not_null
+      - name: category_id
+        description: "Foreign key to base_category"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('base_category')
+                field: category_id

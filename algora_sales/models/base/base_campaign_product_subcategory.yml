@@ -1,0 +1,29 @@
+models:
+  - name: base_campaign_product_subcategory
+    description: "Base model mapping campaigns to product subcategories with associated discounts"
+    columns:
+      - name: campaign_product_subcategory_id
+        description: "Primary key for campaign-subcategory mappings"
+        data_tests:
+          - not_null
+          - unique
+      - name: campaign_id
+        description: "Foreign key to base_marketing_campaigns"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('base_marketing_campaigns')
+                field: campaign_id
+      - name: subcategory_id
+        description: "Foreign key to base_subcategory"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('base_subcategory')
+                field: subcategory_id
+      - name: discount
+        description: "Discount rate applied to the subcategory under this campaign"
+        data_tests:
+          - not_null

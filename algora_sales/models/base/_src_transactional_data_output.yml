@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: transactional_data_output
+    database: RAW_BUSINESS_DATA
+    schema: transactional_data_output
+    tables:
+      - name: returns
+      - name: product
+      - name: campaign_product_subcategory
+      - name: category
+      - name: customer
+      - name: customer_product_ratings
+      - name: marketing_campaigns
+      - name: orderitems
+      - name: orders
+      - name: payment_method
+      - name: subcategory
+      - name: supplier

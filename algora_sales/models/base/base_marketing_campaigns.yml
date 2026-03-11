@@ -1,0 +1,18 @@
+models:
+  - name: base_marketing_campaigns
+    description: "Base model for marketing campaigns"
+    columns:
+      - name: campaign_id
+        description: "Primary key for marketing campaigns"
+        data_tests:
+          - not_null
+          - unique
+      - name: campaign_name
+        description: "Campaign name. Unique per campaign"
+        data_tests:
+          - not_null
+          - unique
+      - name: offer_week
+        description: "Week number within the year the campaign offer runs"
+        data_tests:
+          - not_null
