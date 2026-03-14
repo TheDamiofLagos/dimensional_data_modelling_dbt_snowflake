@@ -1,0 +1,49 @@
+models:
+  - name: prep_orderitems
+    description: "Cleaned order line items with discounted_subtotal derived via apply_discount macro"
+    columns:
+      - name: orderitem_id
+        description: "Primary key for order line items"
+        data_tests:
+          - not_null
+          - unique
+      - name: order_id
+        description: "Foreign key to prep_orders"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('prep_orders')
+                field: order_id
+      - name: product_id
+        description: "Foreign key to prep_product"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('prep_product')
+                field: product_id
+      - name: quantity
+        description: "Quantity of the product ordered"
+        data_tests:
+          - not_null
+      - name: supplier_id
+        description: "Foreign key to prep_supplier"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('prep_supplier')
+                field: supplier_id
+      - name: subtotal
+        description: "Line item subtotal before discount"
+        data_tests:
+          - not_null
+      - name: discount
+        description: "Discount rate applied to this line item"
+        data_tests:
+          - not_null
+      - name: discounted_subtotal
+        description: "Subtotal after discount applied"
+        data_tests:
+          - not_null

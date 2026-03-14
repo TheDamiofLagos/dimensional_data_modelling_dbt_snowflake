@@ -1,0 +1,13 @@
+models:
+  - name: prep_category
+    description: "Cleaned category reference data"
+    columns:
+      - name: category_id
+        description: "Primary key for categories"
+        data_tests:
+          - not_null
+          - unique
+      - name: category_name
+        description: "Category name"
+        data_tests:
+          - not_null

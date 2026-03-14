@@ -1,0 +1,35 @@
+models:
+  - name: fct_returns
+    description: "Return event fact table — one row per return. Incremental on return_date."
+    columns:
+      - name: return_id
+        description: "Primary key for returns"
+        data_tests:
+          - not_null
+          - unique
+      - name: order_id
+        description: "Degenerate dimension — links back to fct_order_items"
+        data_tests:
+          - not_null
+      - name: product_id
+        description: "Foreign key to dim_product"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: product_id
+      - name: return_date
+        description: "Date the return was made"
+        data_tests:
+          - not_null
+      - name: reason
+        description: "Reason provided for the return"
+        data_tests:
+          - not_null
+      - name: amount_refunded
+        description: "Amount refunded for the return"
+        data_tests:
+          - not_null
+      - name: days_to_return
+        description: "Number of days between the original order_date and return_date"

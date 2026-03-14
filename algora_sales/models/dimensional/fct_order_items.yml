@@ -1,0 +1,76 @@
+models:
+  - name: fct_order_items
+    description: "Order line item fact table — one row per order line item. Incremental on order_date."
+    columns:
+      - name: orderitem_id
+        description: "Primary key for order line items"
+        data_tests:
+          - not_null
+          - unique
+      - name: order_id
+        description: "Degenerate dimension — groups line items back to a single order"
+        data_tests:
+          - not_null
+      - name: order_date
+        description: "Date the order was placed"
+        data_tests:
+          - not_null
+      - name: customer_id
+        description: "Foreign key to dim_customer"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_id
+      - name: product_id
+        description: "Foreign key to dim_product"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: product_id
+      - name: supplier_id
+        description: "Foreign key to dim_supplier"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_supplier')
+                field: supplier_id
+      - name: payment_method_id
+        description: "Foreign key to dim_payment_method"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_payment_method')
+                field: payment_method_id
+      - name: campaign_id
+        description: "Foreign key to dim_marketing_campaign. Nullable — not all orders are linked to a campaign"
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_marketing_campaign')
+                field: campaign_id
+      - name: is_campaign_order
+        description: "Boolean flag — true when the order is linked to a marketing campaign"
+        data_tests:
+          - not_null
+      - name: quantity
+        description: "Quantity of the product ordered"
+        data_tests:
+          - not_null
+      - name: subtotal
+        description: "Line item subtotal before discount"
+        data_tests:
+          - not_null
+      - name: discount
+        description: "Discount rate applied to this line item"
+        data_tests:
+          - not_null
+      - name: discounted_subtotal
+        description: "Subtotal after discount"
+        data_tests:
+          - not_null

@@ -1,0 +1,39 @@
+models:
+  - name: prep_returns
+    description: "Cleaned return events with days_to_return derived from order_date"
+    columns:
+      - name: return_id
+        description: "Primary key for returns"
+        data_tests:
+          - not_null
+          - unique
+      - name: order_id
+        description: "Foreign key to prep_orders"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('prep_orders')
+                field: order_id
+      - name: product_id
+        description: "Foreign key to prep_product"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('prep_product')
+                field: product_id
+      - name: return_date
+        description: "Date the return was made"
+        data_tests:
+          - not_null
+      - name: reason
+        description: "Reason provided for the return"
+        data_tests:
+          - not_null
+      - name: amount_refunded
+        description: "Amount refunded for the return"
+        data_tests:
+          - not_null
+      - name: days_to_return
+        description: "Number of days between order_date and return_date"

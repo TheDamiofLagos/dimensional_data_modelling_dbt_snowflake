@@ -1,0 +1,25 @@
+models:
+  - name: bridge_campaign_subcategory
+    description: "Bridge table resolving the many-to-many between marketing campaigns and subcategories. Each campaign has ~100 subcategory rows."
+    columns:
+      - name: campaign_product_subcategory_id
+        description: "Primary key for campaign-subcategory associations"
+        data_tests:
+          - not_null
+          - unique
+      - name: campaign_id
+        description: "Foreign key to dim_marketing_campaign"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_marketing_campaign')
+                field: campaign_id
+      - name: subcategory_id
+        description: "Foreign key to the subcategory targeted by this campaign"
+        data_tests:
+          - not_null
+      - name: discount
+        description: "Discount rate applied to this campaign-subcategory combination"
+        data_tests:
+          - not_null

@@ -1,0 +1,47 @@
+models:
+  - name: prep_customer_product_ratings
+    description: "Cleaned customer product ratings with rating_tier bucket derived via classify_rating macro"
+    columns:
+      - name: customerproductrating_id
+        description: "Primary key for customer product ratings"
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: "Foreign key to prep_customer"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('prep_customer')
+                field: customer_id
+      - name: product_id
+        description: "Foreign key to prep_product"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('prep_product')
+                field: product_id
+      - name: ratings
+        description: "Numeric rating given by the customer (1-5)"
+        data_tests:
+          - not_null
+      - name: rating_tier
+        description: "Bucketed rating: high (>=4), medium (>=3), low (<3)"
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['high', 'medium', 'low']
+      - name: review
+        description: "Free text review written by the customer"
+        data_tests:
+          - not_null
+      - name: sentiment
+        description: "Sentiment classification of the review"
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['good', 'bad']

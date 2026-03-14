@@ -1,0 +1,17 @@
+models:
+  - name: prep_marketing_campaigns
+    description: "Cleaned marketing campaign header records"
+    columns:
+      - name: campaign_id
+        description: "Primary key for marketing campaigns"
+        data_tests:
+          - not_null
+          - unique
+      - name: campaign_name
+        description: "Name of the marketing campaign"
+        data_tests:
+          - not_null
+      - name: offer_week
+        description: "Week the campaign offer is active"
+        data_tests:
+          - not_null

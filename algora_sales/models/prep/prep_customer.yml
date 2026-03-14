@@ -1,0 +1,30 @@
+models:
+  - name: prep_customer
+    description: "Cleaned customer records with full_name derived from first and last name"
+    columns:
+      - name: customer_id
+        description: "Primary key for customers"
+        data_tests:
+          - not_null
+          - unique
+      - name: first_name
+        description: "Customer first name"
+        data_tests:
+          - not_null
+      - name: last_name
+        description: "Customer last name"
+        data_tests:
+          - not_null
+      - name: full_name
+        description: "Concatenation of first_name and last_name"
+        data_tests:
+          - not_null
+      - name: email
+        description: "Customer email address. Unique per customer"
+        data_tests:
+          - not_null
+          - unique
+      - name: country
+        description: "Country of the customer"
+        data_tests:
+          - not_null

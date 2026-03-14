@@ -1,0 +1,21 @@
+models:
+  - name: dim_supplier
+    description: "Supplier dimension — one row per supplier"
+    columns:
+      - name: supplier_id
+        description: "Primary key for suppliers"
+        data_tests:
+          - not_null
+          - unique
+      - name: supplier_name
+        description: "Supplier name"
+        data_tests:
+          - not_null
+      - name: supplier_email
+        description: "Supplier email address"
+        data_tests:
+          - not_null
+      - name: dbt_run_at
+        description: "Audit column — date this row was last materialised"
+        data_tests:
+          - not_null

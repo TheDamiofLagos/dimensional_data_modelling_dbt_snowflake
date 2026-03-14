@@ -1,0 +1,21 @@
+models:
+  - name: dim_marketing_campaign
+    description: "Marketing campaign dimension — one row per campaign (header only). Subcategory targeting lives in bridge_campaign_subcategory"
+    columns:
+      - name: campaign_id
+        description: "Primary key for marketing campaigns"
+        data_tests:
+          - not_null
+          - unique
+      - name: campaign_name
+        description: "Name of the marketing campaign"
+        data_tests:
+          - not_null
+      - name: offer_week
+        description: "Week the campaign offer is active"
+        data_tests:
+          - not_null
+      - name: dbt_run_at
+        description: "Audit column — date this row was last materialised"
+        data_tests:
+          - not_null

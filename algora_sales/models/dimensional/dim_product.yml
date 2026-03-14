@@ -1,0 +1,31 @@
+models:
+  - name: dim_product
+    description: "Product dimension — one row per product with denormalised subcategory and category names"
+    columns:
+      - name: product_id
+        description: "Primary key for products"
+        data_tests:
+          - not_null
+          - unique
+      - name: product_name
+        description: "Product name"
+        data_tests:
+          - not_null
+      - name: product_price
+        description: "Product price"
+        data_tests:
+          - not_null
+      - name: product_description
+        description: "Product description"
+      - name: subcategory
+        description: "Subcategory name (denormalised from prep_subcategory)"
+        data_tests:
+          - not_null
+      - name: category
+        description: "Category name (denormalised from prep_category)"
+        data_tests:
+          - not_null
+      - name: dbt_run_at
+        description: "Audit column — date this row was last materialised"
+        data_tests:
+          - not_null

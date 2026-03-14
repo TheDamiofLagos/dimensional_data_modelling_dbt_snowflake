@@ -1,0 +1,21 @@
+models:
+  - name: dim_payment_method
+    description: "Payment method dimension — one row per payment method"
+    columns:
+      - name: payment_method_id
+        description: "Primary key for payment methods"
+        data_tests:
+          - not_null
+          - unique
+      - name: payment_method
+        description: "Payment method name"
+        data_tests:
+          - not_null
+          - unique
+          - accepted_values:
+              arguments:
+                values: ['cash', 'credit card', 'debit card', 'net banking', 'upi']
+      - name: dbt_run_at
+        description: "Audit column — date this row was last materialised"
+        data_tests:
+          - not_null

@@ -1,0 +1,17 @@
+models:
+  - name: prep_supplier
+    description: "Cleaned supplier records"
+    columns:
+      - name: supplier_id
+        description: "Primary key for suppliers"
+        data_tests:
+          - not_null
+          - unique
+      - name: supplier_name
+        description: "Supplier name"
+        data_tests:
+          - not_null
+      - name: email
+        description: "Supplier email address"
+        data_tests:
+          - not_null

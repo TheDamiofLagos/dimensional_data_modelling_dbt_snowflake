@@ -1,0 +1,29 @@
+models:
+  - name: prep_campaign_product_subcategory
+    description: "Bridge table resolving the many-to-many between campaigns and subcategories"
+    columns:
+      - name: campaign_product_subcategory_id
+        description: "Primary key for campaign-subcategory associations"
+        data_tests:
+          - not_null
+          - unique
+      - name: campaign_id
+        description: "Foreign key to prep_marketing_campaigns"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('prep_marketing_campaigns')
+                field: campaign_id
+      - name: subcategory_id
+        description: "Foreign key to prep_subcategory"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('prep_subcategory')
+                field: subcategory_id
+      - name: discount
+        description: "Discount rate for this campaign-subcategory combination"
+        data_tests:
+          - not_null

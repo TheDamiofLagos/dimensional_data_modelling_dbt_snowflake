@@ -1,0 +1,49 @@
+models:
+  - name: prep_orders
+    description: "Cleaned order records with surrogate key, campaign flag, and FK references"
+    columns:
+      - name: order_id_surrogate
+        description: "Surrogate primary key for orders"
+        data_tests:
+          - not_null
+          - unique
+      - name: order_id
+        description: "Natural key for orders"
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: "Foreign key to prep_customer"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('prep_customer')
+                field: customer_id
+      - name: order_date
+        description: "Date the order was placed"
+        data_tests:
+          - not_null
+      - name: campaign_id
+        description: "Foreign key to prep_marketing_campaigns. Nullable — not all orders are linked to a campaign"
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('prep_marketing_campaigns')
+                field: campaign_id
+      - name: is_campaign_order
+        description: "Boolean flag — true when the order is linked to a marketing campaign"
+        data_tests:
+          - not_null
+      - name: amount
+        description: "Total order amount"
+        data_tests:
+          - not_null
+      - name: payment_method_id
+        description: "Foreign key to prep_payment_method"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('prep_payment_method')
+                field: payment_method_id
