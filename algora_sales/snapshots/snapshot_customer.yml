@@ -1,0 +1,9 @@
+snapshots:
+  - name: snapshot_customer
+    relation: source('transactional_data_output', 'customer')
+    config:
+      unique_key: customer_id
+      strategy: check
+      check_cols:
+        - email
+        - country

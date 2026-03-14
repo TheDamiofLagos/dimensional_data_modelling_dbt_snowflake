@@ -8,6 +8,14 @@ flags:
 seed-paths: ["seeds"]
 model-paths: ["models"]
 macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+snapshots:
+  algora_sales:
+    +target_schema: snapshots
+    +strategy: check
+    +check_cols: all
+
 clean-targets:
   - "target"
   - "dbt_packages"
