@@ -7,3 +7,4 @@ snapshots:
       check_cols:
         - email
         - country
+      dbt_valid_to_current: "to_date('9999-12-31')"
