@@ -1,0 +1,60 @@
+models:
+  - name: present_customer_360
+    description: "One row per customer with aggregated order, return, and rating metrics. Used for CRM and customer success reporting."
+    columns:
+      - name: customer_id
+        description: "Primary key — unique identifier for each customer"
+        data_tests:
+          - not_null
+          - unique
+      - name: full_name
+        description: "Full name of the customer"
+        data_tests:
+          - not_null
+      - name: email
+        description: "Customer email address"
+        data_tests:
+          - not_null
+          - unique
+      - name: country
+        description: "Country of the customer"
+        data_tests:
+          - not_null
+      - name: sub_region
+        description: "Sub-region derived from customer country"
+      - name: region
+        description: "Region derived from customer country"
+      - name: total_orders
+        description: "Total number of distinct orders placed by the customer"
+        data_tests:
+          - not_null
+      - name: total_items
+        description: "Total number of order line items across all orders"
+        data_tests:
+          - not_null
+      - name: total_revenue
+        description: "Sum of discounted subtotals across all order items"
+        data_tests:
+          - not_null
+      - name: total_discount_given
+        description: "Total discount value (subtotal minus discounted_subtotal) given to the customer"
+        data_tests:
+          - not_null
+      - name: avg_order_value
+        description: "Average revenue per order (total_revenue / total_orders)"
+      - name: total_returns
+        description: "Total number of returns made by the customer"
+        data_tests:
+          - not_null
+      - name: total_refunded
+        description: "Total amount refunded to the customer"
+        data_tests:
+          - not_null
+      - name: return_rate
+        description: "Returns as a proportion of total items ordered (total_returns / total_items)"
+      - name: avg_rating_given
+        description: "Average product rating given by the customer across all reviews"
+      - name: total_reviews
+        description: "Total number of product reviews submitted by the customer"
+        data_tests:
+          - not_null

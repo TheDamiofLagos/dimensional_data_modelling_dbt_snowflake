@@ -1,0 +1,53 @@
+models:
+  - name: present_product_performance
+    description: "One row per product with aggregated sales, return, and rating metrics. Used for product and merchandising reporting."
+    columns:
+      - name: product_id
+        description: "Primary key — unique identifier for each product"
+        data_tests:
+          - not_null
+          - unique
+      - name: product_name
+        description: "Name of the product"
+        data_tests:
+          - not_null
+      - name: category
+        description: "Top-level product category"
+        data_tests:
+          - not_null
+      - name: subcategory
+        description: "Product subcategory"
+        data_tests:
+          - not_null
+      - name: product_price
+        description: "List price of the product"
+        data_tests:
+          - not_null
+      - name: total_orders
+        description: "Total number of order line items for this product"
+        data_tests:
+          - not_null
+      - name: total_units_sold
+        description: "Total quantity of units sold across all orders"
+        data_tests:
+          - not_null
+      - name: total_revenue
+        description: "Sum of discounted subtotals for this product"
+        data_tests:
+          - not_null
+      - name: total_returns
+        description: "Total number of returns for this product"
+        data_tests:
+          - not_null
+      - name: total_refunded
+        description: "Total amount refunded for this product"
+        data_tests:
+          - not_null
+      - name: return_rate
+        description: "Returns as a proportion of total units sold (total_returns / total_units_sold)"
+      - name: avg_rating
+        description: "Average customer rating for this product"
+      - name: total_reviews
+        description: "Total number of customer reviews for this product"
+        data_tests:
+          - not_null

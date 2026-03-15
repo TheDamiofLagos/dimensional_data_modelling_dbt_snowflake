@@ -1,0 +1,39 @@
+models:
+  - name: present_campaign_effectiveness
+    description: "One row per marketing campaign with aggregated order and revenue metrics. Used for marketing performance reporting."
+    columns:
+      - name: campaign_id
+        description: "Primary key — unique identifier for each campaign"
+        data_tests:
+          - not_null
+          - unique
+      - name: campaign_name
+        description: "Name of the marketing campaign"
+        data_tests:
+          - not_null
+      - name: offer_week
+        description: "Week the campaign offer was active"
+        data_tests:
+          - not_null
+      - name: total_orders
+        description: "Total number of distinct orders linked to this campaign"
+        data_tests:
+          - not_null
+      - name: total_items
+        description: "Total number of order line items linked to this campaign"
+        data_tests:
+          - not_null
+      - name: total_revenue
+        description: "Total discounted revenue from orders linked to this campaign"
+        data_tests:
+          - not_null
+      - name: total_discounts_given
+        description: "Total discount value (subtotal minus discounted_subtotal) given on campaign orders"
+        data_tests:
+          - not_null
+      - name: campaign_driven_revenue
+        description: "Revenue from order items explicitly flagged as campaign orders (is_campaign_order = true)"
+        data_tests:
+          - not_null
+      - name: campaign_revenue_rate
+        description: "Share of total campaign-linked revenue that was campaign-driven (campaign_driven_revenue / total_revenue)"

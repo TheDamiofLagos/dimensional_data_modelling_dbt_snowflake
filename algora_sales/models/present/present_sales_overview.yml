@@ -1,0 +1,65 @@
+models:
+  - name: present_sales_overview
+    description: "Wide, denormalised sales table — one row per order line item with full customer, product, supplier, payment, and campaign context. Primary BI/Looker Studio feed."
+    columns:
+      - name: orderitem_id
+        description: "Primary key — unique identifier for each order line item"
+        data_tests:
+          - not_null
+          - unique
+      - name: order_id
+        description: "Groups line items back to a single order"
+        data_tests:
+          - not_null
+      - name: order_date
+        description: "Date the order was placed"
+        data_tests:
+          - not_null
+      - name: quantity
+        description: "Quantity of the product ordered"
+        data_tests:
+          - not_null
+      - name: subtotal
+        description: "Line item subtotal before discount"
+        data_tests:
+          - not_null
+      - name: discount
+        description: "Discount rate applied to this line item"
+        data_tests:
+          - not_null
+      - name: discounted_subtotal
+        description: "Subtotal after discount applied"
+        data_tests:
+          - not_null
+      - name: is_campaign_order
+        description: "True when the order is linked to a marketing campaign"
+        data_tests:
+          - not_null
+      - name: customer_id
+        description: "Customer identifier"
+        data_tests:
+          - not_null
+      - name: customer_name
+        description: "Full name of the customer"
+      - name: customer_country
+        description: "Country of the customer"
+      - name: sub_region
+        description: "Sub-region derived from customer country"
+      - name: region
+        description: "Region derived from customer country"
+      - name: product_name
+        description: "Name of the product ordered"
+      - name: category
+        description: "Top-level product category"
+      - name: subcategory
+        description: "Product subcategory"
+      - name: product_price
+        description: "List price of the product"
+      - name: supplier_name
+        description: "Name of the supplier who fulfilled the item"
+      - name: payment_method
+        description: "Payment method used for the order"
+      - name: campaign_name
+        description: "Name of the marketing campaign. Null if not a campaign order"
+      - name: offer_week
+        description: "Week the campaign offer was active. Null if not a campaign order"
