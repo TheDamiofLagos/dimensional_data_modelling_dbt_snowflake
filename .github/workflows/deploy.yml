@@ -20,7 +20,7 @@ jobs:
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Verify dbt Fusion
-        run: dbtf --version
+        run: dbt --version
 
       - name: Write Snowflake private key
         run: echo "${{ secrets.SNOWFLAKE_PRIVATE_KEY }}" > snowflake_key.p8
