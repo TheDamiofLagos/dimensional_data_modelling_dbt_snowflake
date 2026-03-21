@@ -1,0 +1,53 @@
+name: dbt Production Deploy
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 6 * * *'   # every day at 6am UTC
+
+jobs:
+  dbt-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dbt Fusion
+        run: |
+          curl -fsSL https://public.cdn.getdbt.com/fs/install/install.sh | sh -s -- --update
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Verify dbt Fusion
+        run: dbtf --version
+
+      - name: Write Snowflake private key
+        run: echo "${{ secrets.SNOWFLAKE_PRIVATE_KEY }}" > snowflake_key.p8
+
+      - name: Write profiles.yml
+        run: |
+          mkdir -p ~/.dbt
+          cat <<EOF > ~/.dbt/profiles.yml
+          algora_sales:
+            target: prod
+            outputs:
+              prod:
+                type: snowflake
+                account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+                user: ${{ secrets.SNOWFLAKE_USER }}
+                private_key_path: snowflake_key.p8
+                database: ${{ secrets.SNOWFLAKE_DATABASE }}
+                schema: business_analytics_prod
+                warehouse: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+                role: ${{ secrets.SNOWFLAKE_ROLE }}
+                threads: 4
+          EOF
+
+      - name: Install dbt packages
+        working-directory: algora_sales
+        run: dbtf deps
+
+      - name: Run dbt build (prod)
+        working-directory: algora_sales
+        run: dbtf build --target prod
