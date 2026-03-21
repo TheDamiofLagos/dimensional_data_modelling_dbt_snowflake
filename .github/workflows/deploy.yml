@@ -46,8 +46,8 @@ jobs:
 
       - name: Install dbt packages
         working-directory: algora_sales
-        run: dbtf deps
+        run: dbt deps
 
       - name: Run dbt build (prod)
         working-directory: algora_sales
-        run: dbtf build --target prod
+        run: dbt build --target prod
