@@ -21,7 +21,7 @@ jobs:
         run: dbt --version
 
       - name: Write Snowflake private key
-        run: echo "${{ secrets.SNOWFLAKE_PRIVATE_KEY }}" > snowflake_key.p8
+        run: echo "${{ secrets.SNOWFLAKE_PRIVATE_KEY }}" > /tmp/snowflake_key.p8
 
       - name: Write profiles.yml
         run: |
@@ -34,7 +34,7 @@ jobs:
                 type: snowflake
                 account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
                 user: ${{ secrets.SNOWFLAKE_USER }}
-                private_key_path: snowflake_key.p8
+                private_key_path: /tmp/snowflake_key.p8
                 database: ${{ secrets.SNOWFLAKE_DATABASE }}
                 schema: business_analytics_ci
                 warehouse: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
