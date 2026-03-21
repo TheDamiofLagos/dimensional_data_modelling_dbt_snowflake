@@ -18,7 +18,7 @@ jobs:
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Verify dbt Fusion
-        run: dbtf --version
+        run: dbt --version
 
       - name: Write Snowflake private key
         run: echo "${{ secrets.SNOWFLAKE_PRIVATE_KEY }}" > snowflake_key.p8
@@ -44,8 +44,8 @@ jobs:
 
       - name: Install dbt packages
         working-directory: algora_sales
-        run: dbtf deps
+        run: dbt deps
 
       - name: Run dbt build (CI)
         working-directory: algora_sales
-        run: dbtf build --target ci
+        run: dbt build --target ci
