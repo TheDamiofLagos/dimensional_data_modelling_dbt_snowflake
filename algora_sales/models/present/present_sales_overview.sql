@@ -6,6 +6,12 @@
 
 select
     oi.order_date,
+    d.day_of_week_name,
+    d.is_weekend,
+    d.week_start_date,
+    d.month_name,
+    d.quarter_name,
+    d.year,
     oi.orderitem_id,
     oi.order_id,
     oi.quantity,
@@ -27,6 +33,7 @@ select
     mc.campaign_name,
     mc.offer_week
 from {{ ref('fct_order_items') }} oi
+left join {{ ref('dim_date') }} d on oi.order_date = d.date_day
 left join {{ ref('dim_customer') }} c on oi.customer_id = c.customer_id
 left join {{ ref('dim_product') }} p on oi.product_id = p.product_id
 left join {{ ref('dim_supplier') }} s on oi.supplier_id = s.supplier_id

@@ -21,11 +21,11 @@ select
     mc.campaign_id,
     mc.campaign_name,
     mc.offer_week,
-    coalesce(co.total_orders, 0)           as total_orders,
-    coalesce(co.total_items, 0)            as total_items,
-    coalesce(co.total_revenue, 0)          as total_revenue,
-    coalesce(co.total_discounts_given, 0)  as total_discounts_given,
-    coalesce(co.campaign_driven_revenue, 0) as campaign_driven_revenue,
-    {{ safe_divide('co.campaign_driven_revenue', 'co.total_revenue') }} as campaign_revenue_rate
+    coalesce(co.total_orders, 0)                                         as total_orders,
+    coalesce(co.total_items, 0)                                          as total_items,
+    coalesce(co.total_revenue, 0)                                        as total_revenue,
+    coalesce(co.total_discounts_given, 0)                                as total_discounts_given,
+    coalesce(co.campaign_driven_revenue, 0)                              as campaign_driven_revenue,
+    {{ safe_divide('co.campaign_driven_revenue', 'co.total_revenue') }}  as campaign_revenue_rate
 from {{ ref('dim_marketing_campaign') }} mc
 left join campaign_orders co on mc.campaign_id = co.campaign_id
