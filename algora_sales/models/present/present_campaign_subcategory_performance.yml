@@ -1,0 +1,69 @@
+models:
+  - name: present_campaign_subcategory_performance
+    description: >
+      BI-facing model showing campaign performance broken down by targeted subcategory.
+      Uses bridge_campaign_subcategory to resolve the many-to-many relationship between
+      campaigns and subcategories. One row per campaign-subcategory combination.
+      Answers: which subcategories drove the most revenue per campaign, and how does
+      the campaign discount rate relate to actual sales performance?
+    columns:
+      - name: campaign_id
+        description: Foreign key to dim_marketing_campaign.
+        data_tests:
+          - not_null
+
+      - name: campaign_name
+        description: Name of the marketing campaign.
+        data_tests:
+          - not_null
+
+      - name: offer_week
+        description: Week number of the year the campaign was active.
+        data_tests:
+          - not_null
+
+      - name: subcategory_id
+        description: Foreign key to bridge_campaign_subcategory. Identifies the targeted subcategory.
+        data_tests:
+          - not_null
+
+      - name: subcategory
+        description: Subcategory name (denormalised from dim_product).
+        data_tests:
+          - not_null
+
+      - name: category
+        description: Parent category name (denormalised from dim_product).
+        data_tests:
+          - not_null
+
+      - name: campaign_discount_rate
+        description: Discount rate the campaign offered on this subcategory, sourced from bridge_campaign_subcategory.
+        data_tests:
+          - not_null
+
+      - name: total_orders
+        description: Number of distinct orders containing products from this subcategory during the campaign.
+        data_tests:
+          - not_null
+
+      - name: total_items
+        description: Total order item count for this subcategory during the campaign.
+        data_tests:
+          - not_null
+
+      - name: total_revenue
+        description: Total discounted revenue generated from this subcategory during the campaign.
+        data_tests:
+          - not_null
+
+      - name: total_discounts_given
+        description: Total discount value given (subtotal minus discounted_subtotal) for this subcategory.
+        data_tests:
+          - not_null
+
+      - name: avg_revenue_per_item
+        description: Average revenue per order item for this subcategory in the campaign. NULL-safe via safe_divide.
+
+      - name: discount_to_revenue_ratio
+        description: Ratio of discounts given to total revenue. Indicates how much margin was given away. NULL-safe via safe_divide.
