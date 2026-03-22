@@ -1,0 +1,67 @@
+models:
+  - name: dim_date
+    description: >
+      Date dimension generated via dbt_utils.date_spine. Covers 2016-01-01 to 2023-12-31,
+      matching the full range of order and return dates in the project. Use date_day as
+      the join key from any fact or dimension table that carries a date column.
+    columns:
+      - name: date_day
+        description: The calendar date. Primary key and join key for all date relationships.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: day_of_week_number
+        description: Day of week as integer. 0 = Sunday, 6 = Saturday (Snowflake default).
+        data_tests:
+          - not_null
+
+      - name: day_of_week_name
+        description: Abbreviated day name (Mon, Tue, Wed, Thu, Fri, Sat, Sun).
+        data_tests:
+          - not_null
+
+      - name: day_of_month
+        description: Day number within the month (1–31).
+        data_tests:
+          - not_null
+
+      - name: is_weekend
+        description: True if the date falls on a Saturday or Sunday, false otherwise.
+        data_tests:
+          - not_null
+
+      - name: week_start_date
+        description: The Monday that starts the ISO week containing this date.
+        data_tests:
+          - not_null
+
+      - name: week_of_year
+        description: ISO week number within the year (1–53).
+        data_tests:
+          - not_null
+
+      - name: month_number
+        description: Month as integer (1 = January, 12 = December).
+        data_tests:
+          - not_null
+
+      - name: month_name
+        description: Abbreviated month name (Jan, Feb, Mar, etc.).
+        data_tests:
+          - not_null
+
+      - name: quarter_number
+        description: Quarter as integer (1–4).
+        data_tests:
+          - not_null
+
+      - name: quarter_name
+        description: Quarter label (Q1, Q2, Q3, Q4).
+        data_tests:
+          - not_null
+
+      - name: year
+        description: Four-digit calendar year.
+        data_tests:
+          - not_null
