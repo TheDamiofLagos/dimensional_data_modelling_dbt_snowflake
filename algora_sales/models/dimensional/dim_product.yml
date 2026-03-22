@@ -17,6 +17,10 @@ models:
           - not_null
       - name: product_description
         description: "Product description"
+      - name: subcategory_id
+        description: "Foreign key to bridge_campaign_subcategory and prep_subcategory"
+        data_tests:
+          - not_null
       - name: subcategory
         description: "Subcategory name (denormalised from prep_subcategory)"
         data_tests:
