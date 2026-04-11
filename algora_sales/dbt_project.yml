@@ -9,6 +9,7 @@ seed-paths: ["seeds"]
 model-paths: ["models"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
+test-paths: ["tests"]
 
 snapshots:
   algora_sales:
